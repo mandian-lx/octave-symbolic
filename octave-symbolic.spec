@@ -8,6 +8,7 @@ Name:		%{name}
 Version:	%{version}
 Release:	%{release}
 Source0:	%{pkgname}-%{version}.tar.gz
+Patch0:		is_list-1.0.9.patch
 License:	GPLv2+
 Group:		Sciences/Mathematics
 Url:		http://octave.sourceforge.net/symbolic/
@@ -22,7 +23,9 @@ Symbolic toolbox for Octave based on ginac and cln.
 
 %prep
 %setup -q -c %{pkgname}-%{version}
-cp %SOURCE0 .
+tar zxf %SOURCE0
+%patch0 -p0
+tar zcvf %{pkgname}-%{version}.tar.gz %{pkgname}-%{version}
 
 %install
 rm -rf %{buildroot}

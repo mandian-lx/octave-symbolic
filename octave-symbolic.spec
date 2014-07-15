@@ -3,25 +3,26 @@
 Summary:	Symbolic toolbox for Octave
 Name:       octave-%{pkgname}
 Version:	1.0.9
-Release:       3
+Release:	5
 Source0:	%{pkgname}-%{version}.tar.gz
 Patch0:		is_list-1.0.9.patch
 License:	GPLv2+
 Group:		Sciences/Mathematics
 Url:		http://octave.sourceforge.net/symbolic/
-Conflicts:	octave-forge <= 20090607
-Requires:	octave >= 3.1.55
 BuildRequires:  octave-devel >= 3.1.55
 BuildRequires:  pkgconfig(gl)
 BuildRequires:  pkgconfig(glu)
 BuildRequires:	ginac-devel
+Requires:       octave(api) = %{octave_api}
+Requires(post): octave
+Requires(postun): octave
 
 %description
 Symbolic toolbox for Octave based on ginac and cln.
 
 %prep
 %setup -q -c %{pkgname}-%{version}
-tar zxf %SOURCE0
+tar zxf %{SOURCE0}
 %patch0 -p0
 tar zcvf %{pkgname}-%{version}.tar.gz %{pkgname}-%{version}
 
@@ -32,17 +33,20 @@ export OCT_PREFIX=%{buildroot}%{_datadir}/octave/packages
 export OCT_ARCH_PREFIX=%{buildroot}%{_libdir}/octave/packages
 octave -q --eval "pkg prefix $OCT_PREFIX $OCT_ARCH_PREFIX; pkg install -verbose -nodeps -local %{pkgname}-%{version}.tar.gz"
 
-tar zxf %SOURCE0 
+tar zxf %{SOURCE0} 
 mv %{pkgname}-%{version}/COPYING .
 mv %{pkgname}-%{version}/DESCRIPTION .
 
 %clean
 
 %post
-%{_bindir}/test -x %{_bindir}/octave && %{_bindir}/octave -q -H --no-site-file --eval "pkg('rebuild');" || :
+%octave_cmd pkg rebuild
+
+%preun
+%octave_pkg_preun
 
 %postun
-%{_bindir}/test -x %{_bindir}/octave && %{_bindir}/octave -q -H --no-site-file --eval "pkg('rebuild');" || :
+%octave_cmd pkg rebuild
 
 %files
 %doc COPYING DESCRIPTION

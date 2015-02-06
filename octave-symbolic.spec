@@ -3,7 +3,7 @@
 Summary:	Symbolic toolbox for Octave
 Name:       octave-%{pkgname}
 Version:	1.0.9
-Release:	5
+Release:	6
 Source0:	%{pkgname}-%{version}.tar.gz
 Patch0:		is_list-1.0.9.patch
 License:	GPLv2+

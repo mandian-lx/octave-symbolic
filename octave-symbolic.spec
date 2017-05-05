@@ -13,6 +13,7 @@ BuildArch:	noarch
 BuildRequires:	octave-devel >= 4.0.0
 
 Requires:	octave(api) = %{octave_api}
+Requires:	python-sympy >= 1.0
 
 Requires(post): octave
 Requires(postun): octave

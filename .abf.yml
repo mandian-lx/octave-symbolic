@@ -1,4 +1,5 @@
 removed_sources:
   symbolic-2.5.0.tar.gz: 03e81642f3b1e97ddf8cfce0cb4e0276e45540fc
-sources:
   symbolic-2.6.0.tar.gz: b54e4db058930512e86572d2a42ddff81769fcf2
+sources:
+  symbolic-2.7.0.tar.gz: ddd2b1e4c7500c3e4220ac1e36f91d6d0c5f1ddb
